@@ -361,7 +361,8 @@ class Store
 
         try{
             $isJason = null;
-            $isJason['dataStoreId'] = isset($a['id'])?intval($a['id']):0;
+            //$isJason['dataStoreId'] = isset($a['id'])?intval($a['id']):0;
+            $isJason = isset($a['id'])?intval($a['id']):0;
             print_r( $isJason );
 
             if ($isJason === null) {
@@ -372,7 +373,8 @@ class Store
             echo "isJason ==> value\n\n";
 
             $result = $app->db->fetchAll(
-                "CALL GetStore(:isJason)"
+                //"CALL GetStore(:isJason)"
+                "select storeId, statusFlags, nameId, name, zipCode, latitude, longitude from Store where nameId = :isJason"
                 , Phalcon\Db::FETCH_ASSOC
                 /*, [
                     'inputJson' => $isJason,
