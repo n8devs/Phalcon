@@ -153,7 +153,7 @@ $app->get(
     '/api/store/get/{inputJson}',
     function ($inputJson) use ($app){
         // returns the data of a store
-        echo json_encode(Store::GetStore($app, $inputJson));
+        echo json_encode(Store::GetStoreId($app, $inputJson));
     }
 );
 

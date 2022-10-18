@@ -343,8 +343,13 @@ class Store
         return (array($returnedValue));
     }
 
-    public static function GetStore($app, $inputJson)
+    public static function GetStoreId($app, $inputJson)
     {
+        $returnedValue = null;
+        $returnedValue["status"] = "init";
+
+        return (array($returnedValue));
+
         $returnedValue = null;
 
         if( !is_object($returnedValue) ){
