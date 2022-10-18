@@ -345,6 +345,8 @@ class Store
 
     public static function GetStoreId($app, $inputJson)
     {
+        $returnedValue->error = "GetStoreId";
+
         $returnedValue = new stdClass;
         $returnedValue->error = "";
         $returnedValue->data = "";
