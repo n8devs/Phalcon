@@ -342,4 +342,47 @@ class Store
 
         return (array($returnedValue));
     }
+
+    public static function GetStore($app, $inputJson)
+    {
+        $returnedValue = null;
+
+        if( !is_object($returnedValue) ){
+            $returnedValue = new stdClass;
+        }
+
+        $returnedValue->error = "";
+        $returnedValue->data = "";
+
+        try{
+            $isJason = json_decode($inputJson);
+
+            if ($isJason === null) {
+                $returnedValue->error = "Invalid format";
+                return (array($returnedValue));
+            }
+
+            $sqlStatement = "CALL GetStore(:inputJson);";
+            $result = $app->db->fetchAll(
+                $sqlStatement,
+                Phalcon\Db::FETCH_ASSOC,
+                [
+                    'inputJson' => $inputJson,
+                ]
+            );
+
+            if( empty($result) ){
+                $returnedValue->error = "No data";
+                return (array($returnedValue));
+            }
+
+            $returnedValue->error = "";
+            $returnedValue->data = $result;
+        }
+        catch (Exception $myException) {
+            $returnedValue->error = $myException->getMessage();
+        }
+
+        return (array($returnedValue));
+    }
 }

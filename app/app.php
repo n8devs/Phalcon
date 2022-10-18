@@ -148,6 +148,15 @@ $app->get(
     }
 );
 
+// Returns the data of a store
+$app->get(
+    '/api/store/get/{inputJson}',
+    function ($inputJson) use ($app){
+        // returns the data of a store
+        echo json_encode(Store::GetStore($app, $inputJson));
+    }
+);
+
 ////////////////////////
 //
 // DOCTOR
