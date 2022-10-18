@@ -345,6 +345,8 @@ class Store
 
     public static function GetStoreId($app, $inputJson)
     {
+        print_r( $inputJson );
+        
         $returnedValue = null;
 
         if( !is_object($returnedValue) ){
