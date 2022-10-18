@@ -347,7 +347,7 @@ class Store
     {
         $a = array($inputJson);
         print_r( $a );
-        print_r( $a['id'] );
+        print_r( json_decode($a) );
 
         $returnedValue = null;
 
