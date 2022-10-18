@@ -361,7 +361,7 @@ class Store
 
         try{
             $isJason = null;
-            $isJason['dataStoreId'] = isset($a['id'])?$a['id']:0;
+            $isJason['dataStoreId'] = isset($a['id'])?intval($a['id']):0;
             print_r( $isJason );
 
             if ($isJason === null) {
