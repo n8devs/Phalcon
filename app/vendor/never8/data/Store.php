@@ -346,11 +346,6 @@ class Store
     public static function GetStoreId($app, $inputJson)
     {
         $returnedValue = null;
-        $returnedValue["status"] = "init";
-
-        return (array($returnedValue));
-
-        $returnedValue = null;
 
         if( !is_object($returnedValue) ){
             $returnedValue = new stdClass;
@@ -359,13 +354,18 @@ class Store
         $returnedValue->error = "";
         $returnedValue->data = "";
 
+        print_r( array( $returnedValue ) );
+
         try{
             $isJason = json_decode($inputJson);
+            print_r( $isJason );
 
             if ($isJason === null) {
                 $returnedValue->error = "Invalid format";
                 return (array($returnedValue));
             }
+
+            echo "isJason ==> value";
 
             $sqlStatement = "CALL GetStore(:inputJson);";
             $result = $app->db->fetchAll(
@@ -375,11 +375,14 @@ class Store
                     'inputJson' => $inputJson,
                 ]
             );
+            echo "consulta a base de datos hecha";
 
             if( empty($result) ){
                 $returnedValue->error = "No data";
                 return (array($returnedValue));
             }
+
+            echo json_encode( array($returnedValue) );
 
             $returnedValue->error = "";
             $returnedValue->data = $result;
