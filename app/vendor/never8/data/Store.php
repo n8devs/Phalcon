@@ -345,8 +345,9 @@ class Store
 
     public static function GetStoreId($app, $inputJson)
     {
-        print_r( $inputJson );
-        print_r( $inputJson->id );
+        $a = array($inputJson);
+        print_r( $a );
+        print_r( $a['id'] );
 
         $returnedValue = null;
 
