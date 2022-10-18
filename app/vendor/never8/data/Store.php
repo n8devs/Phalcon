@@ -345,22 +345,21 @@ class Store
 
     public static function GetStoreId($app, $inputJson)
     {
-        $a = array($inputJson);
-        print_r( $a );
-        print_r( json_decode($a) );
-
-        $returnedValue = null;
-
-        if( !is_object($returnedValue) ){
-            $returnedValue = new stdClass;
-        }
-
+        $returnedValue = new stdClass;
         $returnedValue->error = "";
         $returnedValue->data = "";
 
+        // si no hay argumentos salir
+        if( trim( $inputJson ) == "" ){
+            $returnedValue->error = "Invalid format";
+            return (array($returnedValue));
+        }
+
+        $a = json_decode( $inputJson, true );
+
         try{
             $isJason = null;
-            $isJason['dataStoreId'] = isset($inputJson['id'])?$inputJson['id']:0;
+            $isJason['dataStoreId'] = isset($a['id'])?$a['id']:0;
             print_r( $isJason );
 
             if ($isJason === null) {
