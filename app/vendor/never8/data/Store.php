@@ -354,10 +354,9 @@ class Store
         $returnedValue->error = "";
         $returnedValue->data = "";
 
-        print_r( array( $returnedValue ) );
-
         try{
-            $isJason = json_decode($inputJson);
+            $isJason = null;
+            $isJason['dataStoreId'] = isset($inputJson['id'])?$inputJson['id']:0;
             print_r( $isJason );
 
             if ($isJason === null) {
