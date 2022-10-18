@@ -345,8 +345,6 @@ class Store
 
     public static function GetStoreId($app, $inputJson)
     {
-        $returnedValue->error = "GetStoreId";
-
         $returnedValue = new stdClass;
         $returnedValue->error = "";
         $returnedValue->data = "";
@@ -360,34 +358,25 @@ class Store
         $a = json_decode( $inputJson, true );
 
         try{
-            //$isJason = null;
-            //$isJason['dataStoreId'] = isset($a['id'])?intval($a['id']):0;
             $isJason = isset($a['id'])?intval($a['id']):0;
-            print_r( $isJason );
 
             if ($isJason === null) {
                 $returnedValue->error = "Invalid format";
                 return (array($returnedValue));
             }
 
-            echo "isJason ==> value\n\n";
-
             $result = $app->db->fetchAll(
-                //"CALL GetStore(:isJason)"
-                "select storeId, statusFlags, nameId, name, zipCode, latitude, longitude from Store where nameId = :isData"
+                "CALL GetStore(:isData)"
                 , Phalcon\Db::FETCH_ASSOC
                 , [
                     'isData' => $isJason,
                 ]
             );
-            echo "consulta a base de datos hecha";
 
             if( empty($result) ){
                 $returnedValue->error = "No data";
                 return (array($returnedValue));
             }
-
-            echo json_encode( array($returnedValue) );
 
             $returnedValue->error = "";
             $returnedValue->data = $result;
