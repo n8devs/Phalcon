@@ -369,15 +369,14 @@ class Store
                 return (array($returnedValue));
             }
 
-            echo "isJason ==> value";
+            echo "isJason ==> value\n\n";
 
-            $sqlStatement = "CALL GetStore(:isJason);";
             $result = $app->db->fetchAll(
-                $sqlStatement,
-                Phalcon\Db::FETCH_ASSOC,
-                [
-                    'inputJson' => $a,
-                ]
+                "CALL GetStore(:isJason)"
+                , Phalcon\Db::FETCH_ASSOC
+                /*, [
+                    'inputJson' => $isJason,
+                ]*/
             );
             echo "consulta a base de datos hecha";
 
